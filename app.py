@@ -1,8 +1,3 @@
-from flask import Flask
-app = Flask(__name__) # This is the "Entry Point" Vercel is looking for
-
-@app.route('/')
-def home():
 
 import streamlit as st
 import re
@@ -539,3 +534,4 @@ st.markdown("""
 </div>
 
 """, unsafe_allow_html=True)
+
