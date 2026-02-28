@@ -1,3 +1,9 @@
+from flask import Flask
+app = Flask(__name__) # This is the "Entry Point" Vercel is looking for
+
+@app.route('/')
+def home():
+
 import streamlit as st
 import re
 import nltk
@@ -531,4 +537,5 @@ st.markdown("""
     <p>🔬 Advanced NLP Engine | VADER Sentiment Analysis | Machine Learning Feature Extraction</p>
     <p>Disclaimer: This tool assists in credibility assessment. Always verify information from multiple sources.</p>
 </div>
+
 """, unsafe_allow_html=True)
