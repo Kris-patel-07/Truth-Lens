@@ -9,6 +9,16 @@ from nltk.stem import WordNetLemmatizer
 from collections import Counter
 import string
 
+# Fix for Deployment LookupError
+try:
+    nltk.data.find('tokenizers/punkt')
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('punkt')
+    nltk.download('stopwords')
+    nltk.download('wordnet') # Add this since your slides mention lemmatization
+    nltk.download('vader_lexicon') # Add this for your VADER sentiment logic
+
 # --- INITIALIZATION ---
 # Professionals download necessary NLTK data at the start
 nltk.download('stopwords')
@@ -534,4 +544,5 @@ st.markdown("""
 </div>
 
 """, unsafe_allow_html=True)
+
 
