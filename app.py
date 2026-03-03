@@ -9,15 +9,22 @@ from nltk.stem import WordNetLemmatizer
 from collections import Counter
 import string
 
-# Fix for Deployment LookupError
-try:
-    nltk.data.find('tokenizers/punkt')
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    nltk.download('punkt')
-    nltk.download('stopwords')
-    nltk.download('wordnet') # Add this since your slides mention lemmatization
-    nltk.download('vader_lexicon') # Add this for your VADER sentiment logic
+# --- MANDATORY DEPLOYMENT FIX ---
+# This ensures NLTK resources are available on the cloud server
+@st.cache_resource
+def download_nltk_resources():
+    try:
+        # These correspond to your slides: Tokenization, Lemmatization, and VADER
+        nltk.download('punkt')
+        nltk.download('punkt_tab') # Specific fix for NLTK 3.9.1+ / Python 3.13
+        nltk.download('stopwords')
+        nltk.download('wordnet')
+        nltk.download('vader_lexicon')
+        nltk.download('omw-1.4')
+    except Exception as e:
+        st.error(f"Error downloading NLTK resources: {e}")
+
+download_nltk_resources()
 
 # --- INITIALIZATION ---
 # Professionals download necessary NLTK data at the start
@@ -544,5 +551,6 @@ st.markdown("""
 </div>
 
 """, unsafe_allow_html=True)
+
 
 
